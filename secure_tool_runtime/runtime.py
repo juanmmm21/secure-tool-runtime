@@ -1,6 +1,5 @@
 import ast
 import sys
-import time
 import io
 import logging
 import multiprocessing
@@ -86,7 +85,7 @@ def _worker_execute_code(code_str: str, queue: multiprocessing.Queue) -> None:
         compiled = compile(code_str, "<sandbox>", "exec")
         exec(compiled, global_scope, local_scope)
         success = True
-    except Exception as e:
+    except Exception:
         # Extraemos traza del error omitiendo detalles del backend
         error_msg = traceback.format_exc()
         
@@ -158,7 +157,6 @@ class SecureToolRuntime:
             args=(code_str, queue)
         )
         
-        start_time = time.time()
         process.start()
         
         # Esperamos a que termine respetando el timeout
