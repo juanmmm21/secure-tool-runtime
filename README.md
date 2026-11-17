@@ -81,6 +81,28 @@ This module provides operational security for the following calls:
 *   `test_runtime.py`: Integration tests that verify the interception of `open`, `eval`, and covert imports, control of the captured output, and interruption by timeout for infinite loops.
 *   `example.py`: Interactive script that illustrates successful execution of safe scripts, static blocking of injections, and controlled termination of infinite loops.
 
+## Using it as a package
+
+Since `0.1.0` the code lives in the `secure_tool_runtime` package and the repository is
+pip-installable, so other projects can depend on it instead of copying files
+or editing `sys.path`:
+
+```bash
+pip install "secure-tool-runtime @ git+https://github.com/juanmmm21/secure-tool-runtime.git@v0.1.0"
+```
+
+```python
+from secure_tool_runtime import SecureToolRuntime, SecurityValidationError
+```
+
+The old top-level modules are kept as thin re-exports, so scripts that add
+this folder to `sys.path` keep working. This component imports no other
+ai-core component: they are combined in the `aicore` SDK of
+[ai-core-infra-hub](https://github.com/juanmmm21/ai-core-infra-hub), which
+passes collaborators (vector stores, encoders, tokenizers) in by injection.
+
+Development: `pip install -e ".[dev]"`, then `pytest` and `ruff check .`.
+
 ## Installation and Usage
 
 ### 1. Activate the Local Environment and Install Dependencies

@@ -1,5 +1,5 @@
 import unittest
-from runtime import SecureToolRuntime, SecurityValidationError
+from secure_tool_runtime.runtime import SecureToolRuntime, SecurityValidationError
 
 
 class TestSecureToolRuntime(unittest.TestCase):
